@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="login-box">
+  <h2>Login</h2>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <p class="error" id="error"></p>
+</div>
+
+<script>
+  function login() {
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
+
+    // simple hardcoded login
+    if (user === "admin" && pass === "1234") {
+      localStorage.setItem("loggedIn", "true");
+      window.location.href = "dashboard.html";
+    } else {
+      document.getElementById("error").innerText = "Invalid credentials!";
+    }
+  }
+</script>
+
+</body>
+</html>
