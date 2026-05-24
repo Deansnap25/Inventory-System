@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+  font-family: Segoe UI, sans-serif;
+  background: #EEF2F7;
+}
+
+
+.container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+}
+
+
+.sidebar {
+  background: linear-gradient(180deg, #2F80ED, #1C5ED6);
+  color: white;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+
+.main {
+  padding: 20px;
+}
+
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.header {
+  background: #F1F3F5;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+}
+
+td:first-child, th:first-child {
+  text-align: left;
+}
+
+
+button {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.add {
+  background: #27AE60;
+  color: white;
+}
+
+.minus {
+  background: #EB5757;
+  color: white;
+}
+
+
+.good {
+  color: #27AE60;
+  font-weight: 600;
+}

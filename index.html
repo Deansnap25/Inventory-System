@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inventory Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  
+  <div class="sidebar">
+    <h2>Inventory</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Forecast</a>
+    <a href="#">Expiry Alerts</a>
+  </div>
+
+  
+  <div class="main">
+
+    <div class="card">
+
+      <h3>Inventory Table</h3>
+
+      <table id="inventoryTable">
+        <tr class="header">
+          <th>Item</th>
+          <th>Stock</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+
+        <tr>
+          <td>Milk</td>
+
+          <td class="stock"><strong>50</strong></td>
+
+          <td class="status">
+            <span class="good">Good</span>
+          </td>
+
+          <td>
+            <button class="add" onclick="changeStock(this, 1)">+</button>
+            <button class="minus" onclick="changeStock(this, -1)">-</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Rice</td>
+
+          <td class="stock"><strong>200</strong></td>
+
+          <td class="status">
+            <span class="good">Good</span>
+          </td>
+
+          <td>
+            <button class="add" onclick="changeStock(this, 1)">+</button>
+            <button class="minus" onclick="changeStock(this, -1)">-</button>
+          </td>
+        </tr>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function changeStock(btn, value) {
+  let row = btn.parentElement.parentElement;
+  let stockCell = row.querySelector(".stock");
+  let statusCell = row.querySelector(".status");
+
+  let current = parseInt(stockCell.innerText);
+  current += value;
+
+  if (current < 0) current = 0;
+
+  stockCell.innerHTML = "<strong>" + current + "</strong>";
+
+  let text = "";
+  let color = "";
+
+  if (current === 0) {
+    text = "Out of Stock";
+    color = "#EB5757";
+  } else if (current < 20) {
+    text = "Critical";
+    color = "#EB5757";
+  } else if (current < 50) {
+    text = "Low";
+    color = "#F2C94C";
+  } else {
+    text = "Good";
+    color = "#27AE60";
+  }
+
+  statusCell.innerHTML = "<span style='color:" + color + "; font-weight:600;'>" + text + "</span>";
+}
+</script>
+
+</body>
+</html>
