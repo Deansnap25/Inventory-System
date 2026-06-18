@@ -1,112 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory Expiration Tracker</title>
+  <title>Inventory System</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
+<h1>Inventory Expiration System</h1>
 
-  <div class="sidebar">
-    <h2>Inventory</h2>
-    <a href="#" class="active">Dashboard</a>
-    <a href="#">Forecast</a>
-    <a href="#">Expiry Alerts</a>
-    <a href="#">Settings</a>
-  </div>
-
-  <div class="main">
-
-    <div class="summary-cards">
-      <div class="summary-card safe">
-        <h4>Safe Items</h4>
-        <p id="safeCount">0</p>
-      </div>
-      <div class="summary-card expiring">
-        <h4>Expiring Soon</h4>
-        <p id="expiringCount">0</p>
-      </div>
-      <div class="summary-card critical">
-        <h4>Critical (7 days)</h4>
-        <p id="criticalCount">0</p>
-      </div>
-      <div class="summary-card expired">
-        <h4>Expired</h4>
-        <p id="expiredCount">0</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Add New Item</h3>
-      <form id="addItemForm" onsubmit="addItem(event)">
-        <div class="form-row">
-          <input type="text" id="itemName" placeholder="Item Name" required>
-          <input type="number" id="itemStock" placeholder="Stock Quantity" min="0" required>
-          <input type="date" id="itemExpiry" required>
-          <button type="submit" class="btn-primary">Add Item</button>
-        </div>
-      </form>
-    </div>
-
-    <div class="card">
-      <h3>Inventory Table</h3>
-      <div class="table-controls">
-        <input type="text" id="searchInput" placeholder="Search items..." onkeyup="searchItems()">
-        <select id="filterStatus" onchange="filterItems()">
-          <option value="all">All Items</option>
-          <option value="safe">Safe</option>
-          <option value="expiring">Expiring Soon</option>
-          <option value="critical">Critical</option>
-          <option value="expired">Expired</option>
-        </select>
-      </div>
-
-      <table id="inventoryTable">
-        <thead>
-          <tr class="header">
-            <th>Item</th>
-            <th>Stock</th>
-            <th>Expiry Date</th>
-            <th>Days Left</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody">
-          <tr><td colspan="6" style="text-align:center; padding:30px;">Loading...</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-  </div>
-
+<div class="form">
+  <input type="text" id="item" placeholder="Item Name">
+  <input type="number" id="stock" placeholder="Stock">
+  <input type="date" id="expiry">
+  <button onclick="addItem()">Add Item</button>
 </div>
 
-<script>
-const API_URL = 'http://localhost:3000/api/items';
-let inventory = [];
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Stock</th>
+      <th>Expiry Date</th>
+      <th>Days Left</th>
+      <th>Status</th>
+    </tr>
+  </thead>
 
-function getDaysUntilExpiry(expiryDate) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const expiry = new Date(expiryDate);
-  const diffTime = expiry - today;
-  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-}
+  <tbody id="tableBody"></tbody>
+</table>
 
-function getExpiryStatus(daysLeft) {
-  if (daysLeft < 0) return { text: "Expired", class: "expired", color: "#EB5757" };
-  if (daysLeft <= 7) return { text: "Critical", class: "critical", color: "#EB5757" };
-  if (daysLeft <= 30) return { text: "Expiring Soon", class: "expiring", color: "#F2C94C" };
-  return { text: "Safe", class: "safe", color: "#27AE60" };
-}
+<script src="script.js"></script>
 
-function getStockStatus(stock) {
-  if (stock === 0) return { text: "Out of Stock", color: "#EB5757" };
-  if (stock < 20) return { text: "Low Stock", color: "#F2C94C" };
+</body>
+</html>  if (stock < 20) return { text: "Low Stock", color: "#F2C94C" };
   return { text: "In Stock", color: "#27AE60" };
 }
 
